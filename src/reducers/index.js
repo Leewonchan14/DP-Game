@@ -6,6 +6,7 @@ import {Time} from "./LifeAndScore/Time";
 import {Score} from "./LifeAndScore/Score";
 import {isGameOver} from "./isPlay/isGameOver";
 import {collect} from "./Questions/isCollect";
+import {AnswerList} from "./AnswerList/AnswerList";
 
 const rootReducer = combineReducers({
     isPlay,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     Time,
     Score,
     isGameOver,
-    collect
+    collect,
+    AnswerList
 });
 
 export default rootReducer;

@@ -2,9 +2,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useRef, useState} from "react";
 import "../App.css";
 import {COLLECT, collect} from "../reducers/Questions/isCollect";
+import {COLOR_MAP} from "../reducers/AnswerList/AnswerList";
 
 const Questions = () => {
     const question = useRef();
+
+    let color = Object.keys(COLOR_MAP)[Math.floor(Math.random() * 5)];
 
     const [imagePath, setImagePath] = useState("")
 
@@ -42,32 +45,22 @@ const Questions = () => {
     }, [questions, imagePath, collect]);
 
 
-
-
-
-
-
     return (
         <div ref={question} className={"fade-in"} style={{
-            width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center"
+            width: "100%", height: "70%", display: "flex", justifyContent: "center", alignItems: "center"
         }}>
             <div style={{
                 width: "60%",
                 height: "50%",
                 display: "flex",
+                fontSize: "50px",
+                color: COLOR_MAP[collect],
+                fontWeight: "bold",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#E0F4FF",
-                borderRadius: "20px",
-                boxShadow: "4px 4px 0px rgba(0, 0, 0, 1.25)"
+                textShadow: "-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black",
             }}>
-                <div style={{
-                    width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center"
-                }}>
-                    <img style={{width: "100%", height: "100%", borderRadius: "20px"}}
-                         src={`${process.env.PUBLIC_URL}/${imagePath}`}/>
-                </div>
-
+                {color}
             </div>
         </div>
     )

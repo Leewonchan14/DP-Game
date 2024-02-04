@@ -9,6 +9,7 @@ const TimeAndScore = () => {
     return (
         <div style={{
             width: "100%",
+            height: "10%",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
