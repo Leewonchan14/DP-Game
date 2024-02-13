@@ -1,8 +1,7 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {ADD_SCORE} from "../reducers/LifeAndScore/Score";
-import {NEXT_QUESTION, nextQuestion} from "../reducers/Questions/Question";
-import {collect, COLLECT} from "../reducers/Questions/isCollect";
+import {ADD_SCORE, DECREASE_SCORE} from "../reducers/ScoreAndTime/ScoreAndTime";
+import {NEXT_QUESTION} from "../reducers/Questions/Question";
 
 const GameButton = ({value, fileName}) => {
     const [isClick, setIsClick] = useState()
@@ -11,26 +10,16 @@ const GameButton = ({value, fileName}) => {
 
     let dispatch = useDispatch();
 
-    let {isPlay} = useSelector(state => state.isPlay);
-
-    let {score} = useSelector(state => state.Score);
+    let {isPlay = false} = useSelector(state => state.GameState);
 
     let {questions} = useSelector(state => state.questions);
 
-    let {collect} = useSelector(state => state.collect);
-
     const isClickButton = (value) => {
         if ((questions + 1) % 3 === value) {
-            console.log("win");
-            dispatch({type: ADD_SCORE, score: score + 1});
-            dispatch({
-                    type: NEXT_QUESTION,
-                    questions: Math.floor(Math.random() * 3)
-                })
-            dispatch({type: COLLECT, collect : !collect})
+            dispatch({type: ADD_SCORE});
+            dispatch({type: NEXT_QUESTION})
         } else {
-            console.log("lose");
-            dispatch({type: ADD_SCORE, score: (score - 3) > 0 ? score - 3 : 0})
+            dispatch({type: DECREASE_SCORE, gap: 3})
         }
     }
 
@@ -47,8 +36,8 @@ const GameButton = ({value, fileName}) => {
             justifyContent: "center",
             alignItems: "center",
         }}
-                onMouseDown={() => isPlay && setIsClick(true)}
-                onMouseOut={() => isPlay && setIsClick(false)}
+                onMouseDown={() => setIsClick(isPlay)}
+                onMouseOut={() => setIsClick(!isPlay)}
                 onMouseUp={() => {
                     setIsClick(false);
                     isPlay && isClickButton(value);

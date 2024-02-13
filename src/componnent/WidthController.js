@@ -5,27 +5,34 @@ import {CHANGE_WIDTH} from "../reducers/MainWidth/width";
 const WidthController = () => {
     let dispatch = useDispatch();
 
-    let width = useSelector((state) => state.width);
+    let widthState = useSelector((state) => state.width);
 
     useEffect(() => {
         const handleResize = () => {
-            if(window.innerWidth === width) return;
+            if(window.innerWidth === widthState) return;
+
+            let width = window.innerWidth;
 
             if (window.innerWidth >= 421 && window.innerWidth <= 768) {
-                dispatch({type: CHANGE_WIDTH, width: 420})
+                width = 420;
             }
             if (window.innerWidth <= 376) {
-                dispatch({type: CHANGE_WIDTH, width: 375})
+                width = 375;
             } else if (window.innerWidth >= 421) {
-                dispatch({type: CHANGE_WIDTH, width: 420})
+                width = 420;
             } else {
-                dispatch({type: CHANGE_WIDTH, width: window.innerWidth})
+                width = window.innerWidth;
             }
+            dispatch({type: CHANGE_WIDTH, width: width});
         }
         window.addEventListener('resize', handleResize)
-    }, []);
 
-    return <div></div>
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [widthState]);
+
+    return <></>
 }
 
 export default WidthController;

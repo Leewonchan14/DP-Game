@@ -1,21 +1,23 @@
 export const GAME_START = "GAME/START";
-export const IS_OVER = "IS/OVER";
+export const GAME_OVER = "GAME_OVER";
 
 const initialState = {
-    isPlay: false
+    isPlay: false,
+    isGameOver: false,
 };
 
-export const isPlay = (state = initialState, action) => {
+export const GameState = (state = initialState, action) => {
     switch (action.type) {
         case GAME_START:
             return {
                 ...state,
-                isPlay: action.isPlay
+                isPlay: true,
             };
-        case IS_OVER:
+        case GAME_OVER:
             return {
                 ...state,
-                isPlay: action.isPlay
+                isPlay: false,
+                isGameOver: true,
             };
         default:
             return state;
