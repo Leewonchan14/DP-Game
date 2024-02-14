@@ -1,22 +1,14 @@
 import {combineReducers} from "redux";
-import {isPlay} from "./isPlay/isPlay";
+import {GameState} from "./GameState/gameState";
 import {width} from "./MainWidth/width";
 import {questions} from "./Questions/Question";
-import {Time} from "./LifeAndScore/Time";
-import {Score} from "./LifeAndScore/Score";
-import {isGameOver} from "./isPlay/isGameOver";
-import {collect} from "./Questions/isCollect";
-import {AnswerList} from "./AnswerList/AnswerList";
+import {ScoreAndTime} from "./ScoreAndTime/ScoreAndTime";
 
 const rootReducer = combineReducers({
-    isPlay,
+    GameState,
     width,
     questions,
-    Time,
-    Score,
-    isGameOver,
-    collect,
-    AnswerList
+    ScoreAndTime,
 });
 
 export default rootReducer;

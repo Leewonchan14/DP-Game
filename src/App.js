@@ -1,23 +1,17 @@
 import './App.css'
 import GameButton from "./componnent/GameButton";
 import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import WidthController from "./componnent/WidthController";
 import GameStartButton from "./componnent/GameStartButton";
 import Questions from "./componnent/Questions";
 import TimeAndScore from "./componnent/TimeAndScore";
-import TimeController from "./componnent/TimeController";
 import RestartButton from "./componnent/RestartButton";
 import {COLOR_MAP} from "./reducers/AnswerList/AnswerList";
 import MainText from "./componnent/MainText";
 
 function App() {
-    let dispatch = useDispatch();
-
-    let {isPlay} = useSelector((state) => state.isPlay);
-
-    let {isGameOver} = useSelector((state) => state.isGameOver);
-
+    let {isPlay, isGameOver} = useSelector((state) => state.GameState);
     let {width} = useSelector((state) => state.width);
 
     let {answerList} = useSelector((state) => state.AnswerList);

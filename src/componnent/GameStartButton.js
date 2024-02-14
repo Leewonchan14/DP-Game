@@ -4,7 +4,7 @@ const GameButton = () => {
     
     let dispatch = useDispatch();
     
-    let {isPlay} = useSelector((state) => state.isPlay);
+    let {isPlay} = useSelector((state) => state.GameState);
     
     return (
         <div style={{width: "100%", height: "80%", display: "flex", flexDirection:"column",  justifyContent: "center", alignItems:"center"}}>

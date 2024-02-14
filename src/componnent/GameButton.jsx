@@ -4,6 +4,8 @@ import {ADD_SCORE} from "../reducers/LifeAndScore/Score";
 import {NEXT_QUESTION, nextQuestion} from "../reducers/Questions/Question";
 import {collect, COLLECT} from "../reducers/Questions/isCollect";
 import {COLOR_MAP, NEXT_ANSWER} from "../reducers/AnswerList/AnswerList";
+import {ADD_SCORE, DECREASE_SCORE} from "../reducers/ScoreAndTime/ScoreAndTime";
+import {NEXT_QUESTION} from "../reducers/Questions/Question";
 
 const GameButton = ({value}) => {
     const [isClick, setIsClick] = useState()
@@ -12,13 +14,9 @@ const GameButton = ({value}) => {
 
     let dispatch = useDispatch();
 
-    let {isPlay} = useSelector(state => state.isPlay);
-
-    let {score} = useSelector(state => state.Score);
+    let {isPlay = false} = useSelector(state => state.GameState);
 
     let {questions} = useSelector(state => state.questions);
-
-    let {collect} = useSelector(state => state.collect);
 
     const isClickButton = (value) => {
         console.log(`value: ${value}, collect: ${collect}`)
@@ -30,9 +28,13 @@ const GameButton = ({value}) => {
                 collect: Object.keys(COLOR_MAP)[Math.floor(Math.random() * 5)]
             })
             dispatch({type: NEXT_ANSWER, answerList: ["빨강", "파랑", "노랑", "초록", "검정"].sort(() => Math.random() - 0.5)});
+        if ((questions + 1) % 3 === value) {
+            dispatch({type: ADD_SCORE});
+            dispatch({type: NEXT_QUESTION})
         } else {
             console.log("lose");
             dispatch({type: ADD_SCORE, score: (score - 1) > 0 ? score - 1 : 0})
+            dispatch({type: DECREASE_SCORE, gap: 3})
         }
     }
 
@@ -52,8 +54,8 @@ const GameButton = ({value}) => {
             justifyContent: "center",
             alignItems: "center",
         }}
-                onMouseDown={() => isPlay && setIsClick(true)}
-                onMouseOut={() => isPlay && setIsClick(false)}
+                onMouseDown={() => setIsClick(isPlay)}
+                onMouseOut={() => setIsClick(!isPlay)}
                 onMouseUp={() => {
                     setIsClick(false);
                     isPlay && isClickButton(value);

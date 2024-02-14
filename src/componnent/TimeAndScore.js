@@ -3,8 +3,7 @@ import TimeController from "./TimeController";
 
 const TimeAndScore = () => {
 
-    let {time} = useSelector((state) => state.Time);
-    let {score} = useSelector((state) => state.Score);
+    let {score, time} = useSelector((state) => state.ScoreAndTime);
 
     return (
         <div style={{
