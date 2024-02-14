@@ -36,9 +36,9 @@ function App() {
                 alignItems: "center"
             }}><span style={{marginRight: "10px", color: "red"}}>지는</span>가위 바위 보
             </div>
-            <div style={{width: "100%", height: "86%"}}>
+            <div style={{width: "100%", height: "86%", display:"flex", flexDirection:"column"}}>
+                <TimeAndScore visible={isPlay || isGameOver}/>
                 {(!isGameOver && !isPlay && <GameStartButton/>)}
-                {(isPlay || isGameOver) && <TimeAndScore/>}
                 {isPlay && <Questions/>}
                 {isGameOver && <RestartButton/>}
             </div>
