@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {ADD_SCORE, DECREASE_SCORE} from "../reducers/ScoreAndTime/ScoreAndTime";
 import {NEXT_QUESTION} from "../reducers/Questions/Question";
+import "../constants/style.css";
 
 const GameButton = ({value, fileName}) => {
     const [isClick, setIsClick] = useState()
@@ -50,7 +51,7 @@ const GameButton = ({value, fileName}) => {
                 justifyContent: "center",
                 alignItems: "center"
             }}>
-                <img src={`${process.env.PUBLIC_URL}/${fileName}`}
+                <img className="image" src={`${process.env.PUBLIC_URL}/${fileName}`}
                      style={{width: "100%", height: "100%", objectFit: "contain"}} alt={"z"}/>
             </div>
         </button>

@@ -14,7 +14,8 @@ const TimeAndScore = () => {
             fontSize: "30px",
             fontWeight: "bold"
         }}>
-            <span><TimeController/></span>
+            <TimeController/>
+            <span></span>
             <span>Time : {time}</span>
             <span>Score : {score}</span>
             <span></span>

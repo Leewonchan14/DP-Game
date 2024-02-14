@@ -1,6 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useRef, useState} from "react";
 import "../App.css";
+import "../constants/style.css";
 
 const Questions = () => {
     const questionRef = useRef();
@@ -9,20 +10,7 @@ const Questions = () => {
 
     const [imagePath, setImagePath] = useState("")
 
-    let {questions, question} = useSelector((state) => state.questions);
-
-    // const blink = () => {
-    //     const current = question.current;
-    //
-    //     if (current) {
-    //         // Temporarily remove the animation class to reset the animation
-    //         current.classList.remove('fade-in');
-    //
-    //         setTimeout(() => {
-    //             current.classList.add('fade-in');
-    //         }, 10); // 10ms is a short delay before re-adding the class
-    //     }
-    // }
+    let {questions} = useSelector((state) => state.questions);
 
     useEffect(() => {
         dispatch({type: "INIT_QUESTION", question: questionRef});
@@ -61,8 +49,12 @@ const Questions = () => {
                 <div style={{
                     width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center"
                 }}>
-                    <img style={{width: "100%", height: "100%", borderRadius: "20px"}}
-                         src={`${process.env.PUBLIC_URL}/${imagePath}`}/>
+                    <img
+                        className="image"
+                        style={{width: "100%", height: "100%", borderRadius: "20px"}}
+                        src={`${process.env.PUBLIC_URL}/${imagePath}`}
+                        alt={"가위 바위 보"}
+                    />
                 </div>
 
             </div>

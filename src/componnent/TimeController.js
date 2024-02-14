@@ -6,6 +6,7 @@ import {TIME_DECREASE} from "../reducers/ScoreAndTime/ScoreAndTime";
 const TimeController = () => {
     const dispatch = useDispatch();
     const {time} = useSelector((state) => state.ScoreAndTime);
+
     useEffect(() => {
         // 설정된 시간 간격마다 setInterval 콜백이 실행된다.
         const id = setInterval(() => {
@@ -22,7 +23,7 @@ const TimeController = () => {
         // 카운트 변수가 바뀔때마다 useEffecct 실행
     }, [time]);
 
-    return <div></div>;
+    return <></>;
 };
 
 export default TimeController;
