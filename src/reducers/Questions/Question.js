@@ -2,14 +2,35 @@
 export const NEXT_QUESTION = 'NEXT_QUESTION';
 export const INIT_QUESTION = 'INIT_QUESTION';
 
-const initialState = {
-    questions: Math.floor(Math.random() * 3),
-    question: null,
+const list = ["빨강", "파랑", "노랑", "초록", "검정"];
+
+export const CONVERT_CHAR_TO_COLOR = {
+    "빨강": "red",
+    "파랑": "blue",
+    "노랑": "yellow",
+    "초록": "green",
+    "검정": "black",
 };
 
-const blink = (question) => {
-    const current = question.current;
+const randomColor = () => {
+    return CONVERT_CHAR_TO_COLOR[list[Math.floor(Math.random() * 5)]];
+}
+const randomChar = () => {
+    return list[Math.floor(Math.random() * 5)];
+}
 
+const shuffleAnswerCharList = () => {
+    return list.sort(() => Math.random() - 0.5);
+}
+
+const initialState = {
+    questionChar: randomChar(),
+    questionColor: randomColor(),
+    answerCharList: shuffleAnswerCharList(),
+    questionRef: null,
+};
+
+const blink = ({current}) => {
     if (current) {
         // Temporarily remove the animation class to reset the animation
         current.classList.remove('fade-in');
@@ -18,21 +39,22 @@ const blink = (question) => {
             current.classList.add('fade-in');
         }, 10); // 10ms is a short delay before re-adding the class
     }
-
 }
 
-export const questions = (state = initialState, action) => {
+export const questionState = (state = initialState, action) => {
     switch (action.type) {
         case NEXT_QUESTION:
-            blink(state.question);
+            blink(state.questionRef);
             return {
                 ...state,
-                questions: Math.floor(Math.random() * 3)
+                questionChar: randomChar(),
+                questionColor: randomColor(),
+                answerCharList: shuffleAnswerCharList(),
             };
         case INIT_QUESTION:
             return {
                 ...state,
-                question: action.question
+                questionRef: action.question
             };
         default:
             return state;
