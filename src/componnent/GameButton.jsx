@@ -36,8 +36,8 @@ const GameButton = ({value, fileName}) => {
             justifyContent: "center",
             alignItems: "center",
         }}
-                onMouseDown={() => setIsClick(isPlay)}
-                onMouseOut={() => setIsClick(!isPlay)}
+                onMouseDown={() => isPlay && setIsClick(true)}
+                onMouseOut={() => isPlay && setIsClick(false)}
                 onMouseUp={() => {
                     setIsClick(false);
                     isPlay && isClickButton(value);
