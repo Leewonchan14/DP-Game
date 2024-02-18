@@ -1,14 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 body {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
-#root{
+#root {
     height: 100%;
     width: 100%;
     display: flex;
@@ -25,6 +29,56 @@ body {
     }
 }
 
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes red-color {
+    from {
+        background: #ff0000;
+    }
+    to{
+        background: #ffffff;
+    }
+}
+
+@keyframes green-color {
+    from {
+        background: #00ff00;
+    }
+    to{
+        background: #ffffff;
+    }
+}
+
+
+
 .fade-in {
-    animation: fadeIn 0.2s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+.red-color{
+    animation: red-color 0.5s ease-in-out;
+}
+
+.green-color{
+    animation: green-color 0.5s ease-in-out;
 }

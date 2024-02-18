@@ -1,16 +1,17 @@
 import './App.css'
 import GameButton from "./componnent/GameButton";
-import {useEffect} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import WidthController from "./componnent/WidthController";
 import GameStartButton from "./componnent/GameStartButton";
-import Questions from "./componnent/Questions";
+import QuestionsBody from "./componnent/QuestionsBody";
 import TimeAndScore from "./componnent/TimeAndScore";
 import RestartButton from "./componnent/RestartButton";
 
 function App() {
     let {isPlay, isGameOver} = useSelector((state) => state.GameState);
     let {width} = useSelector((state) => state.width);
+    let {answers, boxChars} = useSelector((state) => state.QuestionState);
 
     return (
         <div
@@ -20,6 +21,7 @@ function App() {
                 minWidth: "375px",
                 backgroundColor: "white",
                 display: "flex",
+                position: "relative",
                 flexDirection: "column",
                 alignItems: "center",
                 border: "solid 1px black",
@@ -34,22 +36,18 @@ function App() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center"
-            }}><span style={{marginRight: "10px", color: "red"}}>지는</span>가위 바위 보
+            }}>알맞은 글자 연결
             </div>
-            <div style={{width: "100%", height: "86%", display:"flex", flexDirection:"column"}}>
+            {(!isGameOver && !isPlay && <GameStartButton/>)}
+            <div style={{width: "100%", height: "86%", display: "flex", flexDirection: "column"}}>
                 <TimeAndScore visible={isPlay || isGameOver}/>
-                {(!isGameOver && !isPlay && <GameStartButton/>)}
-                {isPlay && <Questions/>}
+                <QuestionsBody/>
                 {isGameOver && <RestartButton/>}
             </div>
-            <div style={{width: "100%", height: "100px", display: "flex", justifyContent: "space-between"}}>
-                <sizebox style={{width: "auto"}}></sizebox>
-                <GameButton value={2} fileName={"rock.png"}/>
-                <sizebox style={{width: "auto"}}></sizebox>
-                <GameButton value={1} fileName={"paper.png"}/>
-                <sizebox style={{width: "auto"}}></sizebox>
-                <GameButton value={0} fileName={"scissors.png"}/>
-                <sizebox style={{width: "auto"}}></sizebox>
+            <div className={"w-full h-80 grid gap-4 grid-cols-4 grid-rows-2 p-2"}>
+                {boxChars.map((char, index) => {
+                    return <GameButton key={index} index={index} char={char}/>
+                })}
             </div>
             <sizebox style={{width: "100%", height: "4%"}}></sizebox>
         </div>

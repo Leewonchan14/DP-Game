@@ -5,7 +5,7 @@ const GameButton = () => {
     let dispatch = useDispatch();
     
     return (
-        <div style={{width: "100%", display: "flex", flex:"1", flexDirection:"column",  justifyContent: "center", alignItems:"center"}}>
+        <div className={"absolute w-full h-full flex justify-center items-center bottom-10"} >
             <button style={{width: "200px", height: "100px", backgroundColor: "#E0F4FF", borderRadius: "20px", fontSize: "30px", fontWeight: "bold", cursor: "pointer"}}
                 onClick={() => {dispatch({type: "GAME/START", isPlay: true})}}
             >
