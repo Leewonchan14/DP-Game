@@ -24,7 +24,6 @@ function App() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                border: "solid 1px black",
             }}>
             <WidthController/>
             <div style={{
